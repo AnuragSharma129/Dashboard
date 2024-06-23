@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <!-- google fonts  -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+      }
+      ::-webkit-scrollbar{
+        display: none;
+      }
+
+      #addUserForm input{
+        height: 20px;
+        margin-left: 10px;
+        margin-top: 20px;
+        border-radius: 5px;
+        border: 1px solid;
+        padding: 5px;
+      }
+
+      #addUserBtn{
+        width: 100px;
+        height: 30px;
+        background-color: white;
+        border: 2px solid #4caf50;
+        border-radius: 6px;
+        font-size: 16px;
+        padding: 4px;
+      }
+      #addUserBtn:hover{
+        background-color: #4caf50;
+        transition: all ease 0.4s;
+      }
+
+
+      #searchUserForm input{
+        height: 25px;
+        width: 200px;
+        padding: 2px 2px 2px 10px ;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        border: 1px solid;
+        border-radius: 5px;
+      }
+      #searchUserForm button{
+        height: 30px;
+        width: 100px;
+        background-color: white;
+        border-radius: 5px;
+        border: 2px solid #4caf50;
+        font-size: 16px;
+        padding: 4px;
+      }
+      #searchUserForm button:hover{
+        background-color: #4caf50;
+        transition: all ease 0.4s;
+      }
+
+
+      
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+      }
+      tr{
+        height: 70px;
+      }
+      th{
+        border-top: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px ;
+        background-color: #4caf50;
+        font-size: 19px;
+        font-family: "Roboto";
+        }
+      td {
+        font-size: 17px;
+        text-transform: capitalize;
+        border-bottom: 1px solid #ddd;
+        text-align: center;
+        padding: 10px 8px 10px 8px ;
+        font-family: "Roboto";
+      }
+      button {
+        margin: 5px;
+      }
+      button:hover{
+        cursor: pointer;
+      }
+      #update,#delete{
+        width: 30px;
+        height: 30px;
+      }
+      
+      #updUser{
+        background-color: white;
+        border-radius: 8px;
+        border: 2px solid #4caf50;
+        height: 40px;
+        width: 100px;
+      }
+      #updUser:hover{
+        background-color: #4caf50;
+        transition: all ease 0.5s;
+      }
+      #updateForm{
+        font-family: "Roboto";
+        font-size: 18px;
+        display: inline;
+      }
+      #updateForm input{
+        text-transform: capitalize;
+        margin-left: 5px;
+        height: 20px;
+        border: 1px solid;
+        border-radius: 5px;
+        font-family: "Roboto";
+        padding: 5px;
+      }
+
+      #cancel{
+        display: inline;
+        border: 2px solid #4caf50;
+        background-color: white;
+        height: 40px;
+        width: 100px;
+        border-radius: 8px;
+      }
+      #cancel:hover{
+        background-color: #4caf50;
+        transition: all ease 0.4s;
+      }
+
+
+      nav{
+        background-color: #4caf50;
+        text-align: center;
+        height: 100px;
+      }
+
+      h1{
+        font-family: "Roboto";
+        padding-top: 20px;
+        padding-bottom: 20px;
+        color: white;
+      }
+
+      .about{
+        padding-right: 20px;
+        font-size: 18px;
+        text-decoration: none;
+        color: white;
+        font-family: "Roboto";
+      }
+
+      .contact{
+        padding-left: 20px;
+        font-family: "Roboto";
+        color: white;
+        font-size: 18px;
+        text-decoration: none;
+      }
+
+
+    </style>
+  </head>
+  <body>
+
+    <nav>
+
+      <h1>User's Dashboard</h1>
+      <a href="/about" class="about">About</a>
+      <a href="/contact" class="contact">Contact</a>
+
+    </nav>
+
+    <!-- Form for adding a new user -->
+    <form id="addUserForm" style="margin-bottom: 20px">
+      <input type="text" name="name" placeholder="Name" style="margin-left: 20px;" required />
+      <input type="text" name="age" placeholder="Age" required />
+      <input type="text" name="city" placeholder="City" required />
+      <input type="number" name="Class" placeholder="Class" required />
+      <button type="submit" id="addUserBtn">Add User</button>
+
+    </form>
+
+    <form id="searchUserForm">
+
+      <input type="text" name="userId" placeholder="Enter Id Here To Search User" required>
+      <button>Search</button>
+
+    </form>
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Age</th>
+          <th>City</th>
+          <th>Class</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="userTableBody">
+        <% users.forEach(user => { %>
+        <tr id="user-<%= user._id %>">
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.age %></td>
+          <td><%= user.city %></td>
+          <td><%= user.Class %></td>
+          <td>
+            <!-- Update button triggers a modal or new form for updating user details -->
+            <button
+              onclick="showUpdateForm('<%= user._id %>', '<%= user.name %>', '<%= user.age %>', '<%= user.city %>', '<%= user.Class %>')"
+            >
+            <ion-icon name="create-outline" id="update"></ion-icon>
+            </button>
+          </td>
+          <td>
+              <button onclick="deleteUser('<%= user._id %>')">
+                <ion-icon name="trash-outline" id="delete"></ion-icon>
+              </button> 
+          </td>
+            <!-- Delete button triggers a delete request -->
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+    <!-- Update form modal (initially hidden) -->
+    <div
+      id="updateFormModal"
+      style="
+        display: none;
+        position: fixed;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -20%);
+        border: 1px solid #ddd;
+        padding: 20px;
+        background-color: white;
+        height: 200px;
+      "
+    >
+      <form id="updateForm" method="POST">
+        <input type="text" name="name" placeholder="New Name" required />
+        <input type="number" name="age" placeholder="New Age" required />
+        <input type="text" name="city" placeholder="New City" required />
+        <input type="text" name="Class" placeholder="New Class" required />
+        <button type="submit" id="updUser">Update</button>
+      </form>
+      <button onclick="hideUpdateForm()" id="cancel">Cancel</button>
+    </div>
+
+    <script>
+      document
+        .getElementById("addUserForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          fetch("/users/add", {
+            method: "POST",
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                alert("New Student Added")
+                location.reload(); // Reload the page to update the user list
+              } else {
+                alert("Failed to add user");
+              }
+            });
+        });
+
+
+        document.getElementById("searchUserForm").addEventListener("submit", function(event){
+          event.preventDefault()
+          
+          const formData = new FormData(event.target)
+          const userId = formData.get("userId")
+
+          fetch(`/users/${userId}`, {
+            method : "GET", 
+            headers : {"Content-Type" : "applicaion/json"}
+          }).then((res) => res.json())
+          .then((data)=>{
+            const userTableBody = document.getElementById("userTableBody")
+            if(data){
+              userTableBody.innerHTML = `
+              <tr id = "user-${data._id}">
+
+                <td>${data._id}</td>
+                <td>${data.name}</td>
+                <td>${data.age}</td>
+                <td>${data.city}</td>
+                <td>${data.Class}</td>
+                <td>
+                  <button 
+                    onclick="showUpdateForm('${data._id}', '${data.name}', '${data.age}', '${data.city}', '${data.Class}')">
+                    <ion-icon name="create-outline" id="update"></ion-icon>
+                  </button>
+                </td>
+                <td>
+                  <button onclick="deleteUser('${data._id }')">
+                    <ion-icon name="trash-outline" id="delete"></ion-icon>
+                  </button> 
+                </td>
+
+              </tr>`
+
+            }else{
+              userTableBody.innerHTML = `<tr><td colspan="6">User not found</td></tr>`
+            }
+          }).catch((err)=>{
+            console.error(err)
+            alert("Failed To Saerch User")
+          })
+
+        })
+
+
+
+
+      function showUpdateForm(id, name, age, city, Class) {
+        const form = document.getElementById("updateForm");
+        form.action = `/users/update/${id}`;
+        form.elements["name"].value = name;
+        form.elements["age"].value = age;
+        form.elements["city"].value = city;
+        form.elements["Class"].value = Class;
+        document.getElementById("updateFormModal").style.display = "block";
+      }
+
+      document
+        .getElementById("updateForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const formData = new FormData(event.target);
+          fetch(event.target.action, {
+            method: "PUT",
+            body: JSON.stringify(Object.fromEntries(formData)),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                alert("Details Updated Successfully")
+                location.reload(); // Reload the page to update the user list
+              } else {
+                alert("Failed to update user");
+              }
+            });
+        });
+
+      function hideUpdateForm() {
+        document.getElementById("updateFormModal").style.display = "none";
+      }
+
+      function deleteUser(id) {
+        fetch(`/users/delete/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              alert("Data Deleted Successfully")
+              document.getElementById(`user-${id}`).remove(); // Remove the user row from the table
+            } else {
+              alert("Failed to delete user");
+            }
+          });
+      }
+    </script>
+  </body>
+</html>
