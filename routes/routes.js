@@ -22,6 +22,6 @@ router.post("/users/add", usercontrollers.addusers);
 router.put("/users/update/:id", usercontrollers.updateusers);
 
 // Dashboard
-router.get("/users/new/dashboard", usercontrollers.abs);
+router.get("/", usercontrollers.abs);
 
 module.exports = router;
